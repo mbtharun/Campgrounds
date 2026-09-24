@@ -2,11 +2,11 @@ mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'cluster-map',
     style: 'mapbox://styles/mapbox/light-v10',
-    center: [-103.59179687498357, 40.66995747013945],
-    zoom: 3
+    center: [78.9629, 22.5937],
+    zoom: 3.3
 });
 
-map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
 
 
@@ -65,7 +65,7 @@ map.on('load', function () {
         layout: {
             'text-field': '{point_count_abbreviated}',
             'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            'text-size': 12
+            'text-size': 1
         }
     });
 
@@ -126,6 +126,13 @@ map.on('load', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
     map.on('mouseleave', 'clusters', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('mouseenter', 'unclustered-point', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', 'unclustered-point', function () {
         map.getCanvas().style.cursor = '';
     });
 });
